@@ -1,0 +1,4 @@
+# Linux simulation node; install an appropriate PyTorch build for your node first.
+mani_skill>=3.0.0
+mplib
+h5py
