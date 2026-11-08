@@ -1,4 +1,8 @@
 # Linux simulation node; install an appropriate PyTorch build for your node first.
-mani_skill>=3.0.0
-mplib
-h5py
+mani_skill==3.0.1
+sapien==3.0.3
+mplib==0.1.1
+# mplib 0.1.1 segfaults during planner construction with NumPy 2.4.6.
+numpy==1.26.4
+opencv-python==4.11.0.86
+h5py==3.16.0

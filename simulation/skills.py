@@ -5,6 +5,10 @@ from mani_skill.examples.motionplanning.panda.motionplanner import PandaArmMotio
 from mani_skill.examples.motionplanning.base_motionplanner.utils import compute_grasp_info_by_obb, get_actor_obb
 
 
+class MotionPlanningFailure(RuntimeError):
+    """A valid planning request found no path; the live episode may recover."""
+
+
 class PandaSkills:
     def __init__(self, env):
         self.env = env.unwrapped
@@ -17,7 +21,7 @@ class PandaSkills:
     def move(self, pose):
         result = self.planner.move_to_pose_with_screw(pose)
         if isinstance(result, (int, np.integer)) and result == -1:
-            raise RuntimeError("Motion planner could not find a path")
+            raise MotionPlanningFailure("Motion planner could not find a path")
 
     def approach_object(self):
         # Recompute from the actual scene each time, including after a disturbance.

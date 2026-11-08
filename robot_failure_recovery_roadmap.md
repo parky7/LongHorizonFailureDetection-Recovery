@@ -385,11 +385,28 @@ Plan HPC jobs separately for trajectory generation, detector training, and VLM e
 
 ## 8. First-week checklist
 
-- [ ] Install ManiSkill 3 on a GPU node and verify RGB-D rendering.
-- [ ] Run a provided `PickCube` motion-planning example successfully.
-- [ ] Save at least ten successful trajectories with observations and actions.
-- [ ] Identify which Panda motion-planner functions can be exposed as reusable skills.
-- [ ] Inject a dropped-object disturbance and confirm the simulator reports the actual resulting task state.
+- [x] Install ManiSkill 3 on a GPU node and verify RGB-D rendering.
+- [x] Run a provided `PickCube` motion-planning example successfully.
+- [x] Save at least ten successful trajectories with observations and actions.
+- [x] Identify which Panda motion-planner functions can be exposed as reusable skills.
+- [x] Inject a dropped-object disturbance and confirm the simulator reports the actual resulting task state.
+
+Validated November 6, 2026 in `learningProject` on an RTX PRO 6000 Blackwell
+MIG allocation. `outputs/preflight.json` records the upstream expert and native
+RGB-D check; `outputs/phase1_v1/validation.json` records ten successful tabletop
+placements (seeds 100–109). The custom tabletop variant is not the standard
+PickCube benchmark. `outputs/recovery_smoke_v1` demonstrates one detected drop
+and successful scripted recovery without resetting. See the README for exact
+commands, dependency pins, recording format and comparison policies.
+
+The completed [validation report](reports/phase1_validation_2026-11-06.md)
+also records 100 matched test seeds per condition: nominal and oracle scripted
+recovery each succeeded 100/100, while fixed-order execution and simple retries
+after a drop each succeeded 0/100. All 400 recordings and paired states were
+validated. Phase 2's oracle recovery milestone is demonstrated for this one
+controlled-drop scenario. A separate joint-aperture baseline is evaluated
+offline; replacing the oracle online, broadening failures and increasing the
+task horizon remain open.
 
 **Week 3 milestone:** A controlled failure should be detected by an oracle monitor, followed by an executable recovery plan that successfully completes the task without restarting the episode.
 
